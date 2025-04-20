@@ -29,19 +29,16 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Terser
-        run: npm install -g terser
+      - name: Install esbuild
+        run: npm install -g esbuild
 
-      - name: Merge, Minify, and Clean JS Files
+      - name: Bundle and Minify JS with esbuild
         run: |
-          # Merge in proper order and remove import/export lines
-          awk '!/^\s*(import|export)\s/' js/config.js js/utils.js js/qr-manager.js js/script.js > js/script.combined.js
+          # Bundle everything starting from js/script.js and output to same location
+          esbuild js/script.js --bundle --minify --outfile=js/script.js
 
-          # Minify with ES module + modern JS support
-          terser js/script.combined.js -c -m --ecma 2020 --module -o js/script.js
-
-          # Clean up
-          rm js/script.combined.js js/config.js js/utils.js js/qr-manager.js
+          # Remove the now-bundled modules
+          rm js/config.js js/utils.js js/qr-manager.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
