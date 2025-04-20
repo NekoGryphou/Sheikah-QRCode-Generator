@@ -20,6 +20,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,10 +35,10 @@ jobs:
 
       - name: Bundle and Minify JS with esbuild
         run: |
-          # Bundle everything starting from js/script.js and output to same location
-          esbuild js/script.js --bundle --minify --outfile=js/script.js
+          # Bundle everything starting from script.js
+          esbuild js/script.js --bundle --minify --allow-overwrite --outfile=js/script.js
 
-          # Remove the now-bundled modules
+          # Remove now-unused individual JS modules
           rm js/config.js js/utils.js js/qr-manager.js
 
       - name: Setup Pages
