@@ -8,6 +8,7 @@ import {COLORS} from "./config.js";
 export class QRCodeManager {
   /**
    * @public
+   * @constructor
    * @desc Creates a new QRCodeManager instance with configuration options.
    *
    * @param {Object} config - Configuration for QR code generation.
@@ -28,8 +29,6 @@ export class QRCodeManager {
    * @desc Generates a QR code from the given data and renders it with an overlay.
    *
    * @param {string} data - Data to encode in the QR code.
-   *
-   * @returns {Promise<void>} Resolves when the QR code is rendered and overlay is applied.
    */
   async generate(data) {
     this.qrCode.update({data});
@@ -40,22 +39,19 @@ export class QRCodeManager {
   /**
    * @private
    * @desc Adds an overlay image on top of the rendered QR code.
-   *
-   * @returns {Promise<void>} Resolves when the overlay is created and appended.
    */
   async _addOverlay() {
     const base64 = await Utils.fetchImageAsBase64(this.config.overlayUrl);
     const overlay = Utils.createOverlayImage(base64, this.config.svgSize, this.config.overlayOffset);
     this._svgRef.appendChild(overlay);
     Utils.renderSvg(this._svgRef);
+
     $("downloadBtn").disabled = false;
   }
 
   /**
    * @public
    * @desc Downloads the current QR code as an SVG file.
-   *
-   * @returns {void} Initiates download of the SVG file to the user's device.
    */
   download() {
     if (!this._svgRef) return;
@@ -74,8 +70,6 @@ export class QRCodeManager {
    *
    * @param {string} url - The Blob URL of the file.
    * @param {string} filename - The desired name of the downloaded file.
-   *
-   * @returns {void} Initiates download and removes the anchor element.
    */
   _triggerDownload(url, filename) {
     const link = Object.assign(document.createElement("a"), {href: url, download: filename});

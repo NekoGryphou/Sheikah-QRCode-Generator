@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>QR Code Styling</title>
+    <title>Sheikah QR Code Generator</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
     <script src="https://unpkg.com/qr-border-plugin@0.1.1/build/index.js"></script>
@@ -12,8 +13,7 @@
     <div>
       <input type="text"
              id="qrDataInput"
-             placeholder="Enter QR Code data"
-             value="https://linktr.ee/gryphou">
+             placeholder="Enter QR Code data">
 
       <button id="generateBtn">
         Generate QR Code
@@ -24,7 +24,7 @@
 
     <button id="downloadBtn"
             disabled>
-      Download SVG
+      Download as SVG
     </button>
 
     <script type="module" src="js/script.js"></script>

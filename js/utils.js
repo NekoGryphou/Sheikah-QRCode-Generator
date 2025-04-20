@@ -10,6 +10,10 @@ export function $(id) {
   return document.getElementById(id);
 }
 
+/**
+ * @class Utils
+ * @desc Provides static utility methods for QR rendering and manipulation.
+ */
 export default class Utils {
   /**
    * @public
@@ -56,8 +60,6 @@ export default class Utils {
    * @desc Renders the provided SVG element inside the #canvas container.
    *
    * @param {SVGElement} svg - The SVG element to render.
-   *
-   * @returns {void} Updates the DOM with the rendered SVG.
    */
   static renderSvg(svg) {
     const container = $("canvas");
@@ -70,8 +72,6 @@ export default class Utils {
    * @desc Delays execution for a given number of milliseconds.
    *
    * @param {number} ms - The number of milliseconds to wait.
-   *
-   * @returns {Promise<void>} A promise that resolves after the delay.
    */
   static delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

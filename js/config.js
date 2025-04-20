@@ -7,6 +7,7 @@ const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
  * @returns {Object} Base settings for logo, overlay, and sizing.
  */
 export const CONFIG = {
+  defaultData: "https://linktr.ee/gryphou",
   logoUrl: `${basePath}/assets/logo.png`,
   overlayUrl: `${basePath}/assets/overlay.png`,
   svgSize: 400,
