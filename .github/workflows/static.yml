@@ -37,9 +37,7 @@ jobs:
         run: |
           esbuild js/script.js \
             --bundle \
-            --minify-syntax \
-            --minify-whitespace \
-            --minify-identifiers \
+            --minify \
             --target=es2020 \
             --allow-overwrite \
             --outfile=js/script.js
