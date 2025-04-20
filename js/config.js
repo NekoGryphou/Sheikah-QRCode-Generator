@@ -1,3 +1,5 @@
+const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
+
 /**
  * @public
  * @desc Core configuration for QR code generation and layout.
@@ -5,8 +7,8 @@
  * @returns {Object} Base settings for logo, overlay, and sizing.
  */
 export const CONFIG = {
-  logoUrl: "../assets/logo.png",
-  overlayUrl: "../assets/overlay.png",
+  logoUrl: `${basePath}/assets/logo.png`,
+  overlayUrl: `${basePath}/assets/overlay.png`,
   svgSize: 400,
   overlayOffset: {x: 3, y: 1}
 };
