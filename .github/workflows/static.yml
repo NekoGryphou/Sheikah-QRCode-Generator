@@ -34,14 +34,13 @@ jobs:
 
       - name: Merge, Minify, and Clean JS Files
         run: |
-          # Merge files in correct order and strip import/export lines
-          cat js/config.js js/utils.js js/qr-manager.js js/script.js \
-            | grep -vE '^\s*(import|export)\s' > js/script.combined.js
+          # Merge in proper order and remove import/export lines
+          awk '!/^\s*(import|export)\s/' js/config.js js/utils.js js/qr-manager.js js/script.js > js/script.combined.js
 
-          # Minify with modern JS support (template literals, etc.)
-          terser js/script.combined.js -c -m --ecma 2020 -o js/script.js
+          # Minify with ES module + modern JS support
+          terser js/script.combined.js -c -m --ecma 2020 --module -o js/script.js
 
-          # Clean up temporary and unused files
+          # Clean up
           rm js/script.combined.js js/config.js js/utils.js js/qr-manager.js
 
       - name: Setup Pages
