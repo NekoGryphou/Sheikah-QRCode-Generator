@@ -1,0 +1,27 @@
+import {CONFIG} from "./config.js";
+import {$} from "./utils.js";
+import {QRCodeManager} from "./qr-manager.js";
+
+/**
+ * @public
+ * @desc Bootstraps the QR generator app and binds event listeners.
+ *
+ * @returns {void} Initializes app behavior after DOM is ready.
+ */
+window.addEventListener("DOMContentLoaded", () => {
+  const canvas = $("canvas");
+  canvas.style.width = canvas.style.height = `${CONFIG.svgSize}px`;
+
+  const qrManager = new QRCodeManager(CONFIG);
+
+  $("generateBtn").addEventListener("click", async () => {
+    const data = $("qrDataInput").value.trim();
+    if (!data) {
+      alert("Please enter QR Code data.");
+      return;
+    }
+    await qrManager.generate(data);
+  });
+
+  $("downloadBtn").addEventListener("click", () => qrManager.download());
+});
